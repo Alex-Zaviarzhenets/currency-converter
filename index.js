@@ -12,7 +12,7 @@ function handler(req, res) {
     res.end(JSON.stringify(kurs))
   } else if (req.url === '/style.css') {
     const style = fs.readFileSync('style.css')
-    res.setHeaders({'Content-Type': 'text/css; charset=utf-8'})
+    res.setHeader('Content-Type', 'text/css; charset=utf-8')
     res.end(style)
   } else if (req.url === '/script.js') {
     const script = fs.readFileSync('script.js')
