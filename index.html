@@ -10,11 +10,23 @@
 </head>
 
 <body>
-  <form action="">
-    <input id="input" type="text" placeholder="$">
-    <button id="btn">convert</button>
-    <div id="result">€</div>
+  <form action="javascript:">
+    <div>
+      <input type="checkbox" id="c" hidden>
+      <button id="eur" type="button" onclick="c.checked = false">EUR</button>
+      <button id="usd" type="button" onclick="c.checked = true">USD</button>
+    </div>
+    <input id="input" type="text" placeholder="" type="number">
+    <output id="result"></output>
   </form>
 </body>
 
 </html>
+
+
+<!-- </head>
+<body>
+<input type="checkbox" id="c" hidden> 
+<button id="a" onclick="c.checked = false">a</button>
+<button id="b" onclick="c.checked = true">b</button>
+</body> -->

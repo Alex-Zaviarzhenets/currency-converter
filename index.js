@@ -3,7 +3,12 @@ const http = require('http')
 const server = http.createServer(handler)
 const port = 3000
 const fs = require('fs')
-const kurs = 0.95
+
+
+let url = 'https://api.exchangeratesapi.io/v1/latest?access_key=18e6635dbf1acfb0ec5194de452ce1c6&base=EUR'
+let kurs 
+
+fetch(url).then(response => response.json()).then(({rates}) => {kurs = rates.USD})
 
 
 
