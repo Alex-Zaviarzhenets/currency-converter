@@ -13,20 +13,18 @@
   <form action="javascript:">
     <div>
       <input type="checkbox" id="c" hidden>
-      <button id="eur" type="button" onclick="c.checked = false">EUR</button>
-      <button id="usd" type="button" onclick="c.checked = true">USD</button>
+      <select name="" id="select1">
+        <option value="eur" selected>eur</option>
+        <option value="usd">usd</option>
+      </select>
+      <select name="" id="select2">
+        <option value="eur">eur</option>
+        <option value="usd" selected>usd</option>
+      </select>
     </div>
     <input id="input" type="text" placeholder="" type="number">
     <output id="result"></output>
   </form>
 </body>
-
+€
 </html>
-
-
-<!-- </head>
-<body>
-<input type="checkbox" id="c" hidden> 
-<button id="a" onclick="c.checked = false">a</button>
-<button id="b" onclick="c.checked = true">b</button>
-</body> -->
