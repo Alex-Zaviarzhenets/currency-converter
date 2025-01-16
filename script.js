@@ -13,6 +13,13 @@ update()
 
 select1.addEventListener('change', update);
 select2.addEventListener('change', update);
+input.addEventListener('input', update)
+
+
+
+input.addEventListener('input', () => {
+  timeoutId = setTimeout(update, 500);
+});
 
 input.onfocus = removeSign
 
