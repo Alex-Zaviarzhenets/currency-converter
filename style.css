@@ -1,4 +1,10 @@
+body {
+  background-color: #D2B48C;
+}
 
+h1 {
+  margin-left: 237px;
+}
 
 form{
   display: inline-grid;
@@ -9,6 +15,8 @@ form{
   grid-template-columns: 1fr 1fr;
   place-items: center;
   padding: 10px;
+  background-color: #007bff;
+  border-radius: 5px;
 }
 
 form>:first-child {
@@ -21,7 +29,9 @@ form>:first-child {
   padding: 0;
   border: 1px solid black;
   text-align: center;
-  
+  background-color: #28a745;
+  color: #333333;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #btn{
@@ -40,4 +50,8 @@ form>:first-child {
 #c:not(:checked)~#eur,
 #c:checked~#usd {
   background-color: aqua;
+}
+
+option {
+  background-color: #28a745;
 }

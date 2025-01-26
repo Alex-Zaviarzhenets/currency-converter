@@ -4,17 +4,16 @@ const server = http.createServer(handler)
 const port = 3000
 const fs = require('fs')
 
-
 let url = 'https://api.exchangeratesapi.io/v1/latest?access_key=18e6635dbf1acfb0ec5194de452ce1c6&base=EUR'
-let kurs 
-
-fetch(url).then(response => response.json()).then(({rates}) => {kurs = rates.USD})
-
-
+let rates 
+fetch(url).then(response => response.json()).then((newObj) => {
+  rates = newObj.rates
+}).then()
+ 
 
 function handler(req, res) {
-  if (req.url === '/getKurs') {
-    res.end(JSON.stringify(kurs))
+  if (req.url === '/rates') {
+    res.end(JSON.stringify(rates))
   } else if (req.url === '/style.css') {
     const style = fs.readFileSync('style.css')
     res.setHeader('Content-Type', 'text/css; charset=utf-8')

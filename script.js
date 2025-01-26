@@ -1,13 +1,16 @@
 
 const [form] = document.forms
-const [box, input] = document.getElementsByTagName('input')
+const [input] = document.getElementsByTagName('input')
 const button = document.getElementsByTagName('button')[2]
 const output = document.getElementById('result')
 const select1 = document.getElementById('select1')
 const select2 = document.getElementById('select2')
-let kurs
+let rates
 
-fetch('/getKurs').then(response => response.text()).then(text => kurs = +text)
+fetch('/rates')
+  .then(response => response.json())
+  .then(data => rates = data)
+  .then(fillSelects)
 
 update()
 
@@ -15,47 +18,24 @@ select1.addEventListener('change', update);
 select2.addEventListener('change', update);
 input.addEventListener('input', update)
 
-
-
-input.addEventListener('input', () => {
-  timeoutId = setTimeout(update, 500);
-});
-
-input.onfocus = removeSign
-
 function update() {
-  input.placeholder = !box.checked ? "€" : "$";
-  output.value = box.checked ? "€" : "$";
-  removeSign()
-  const fromCurrency = select1.value
-  const toCurrency = select2.value
+  const rate1 = select1.value
+  const rate2 = select1.selectedIndex === select2.selectedIndex
+    ? select1.value : select2.value
 
-  let convert
-  if(fromCurrency === 'eur' && toCurrency === 'usd') {
-    convert = convertUsdEur
-  } else if (fromCurrency === 'usd' && toCurrency === 'eur') {
-    convert = convertEurUsd
-  } else if (fromCurrency === toCurrency) {
-    input.placeholder = toCurrency === 'eur' ? '€' : '$'
-    output.value = input.placeholder
-  }
   if (input.value) {
-    output.value += convert(input.value, kurs).toFixed(2)
-    if (!input.matches(":focus")) {
-      input.value = input.placeholder + input.value
-    }
+    output.value = Number(convert(input.value, rate1, rate2).toFixed(2)).toLocaleString('en-US')
   }
 }
 
-function removeSign() {
-  input.value = input.value.replace(/[\$€]/,'')
+function convert(amount, rate1, rate2) {
+  return amount / rate1 * rate2
 }
 
-
-function convertUsdEur(inputValue, kurs) {
-  return inputValue * kurs
-}
-
-function convertEurUsd(inputValue, kurs) {
-  return inputValue / kurs
+function fillSelects(rates) {
+  for (const key in rates) {
+      const rate = rates[key];
+      select1.append(new Option(key, rate))
+      select2.append(new Option(key, rate * 0.99))
+  }
 }
